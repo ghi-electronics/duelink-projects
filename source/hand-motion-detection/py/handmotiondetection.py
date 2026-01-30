@@ -18,7 +18,7 @@ duelink = DUELinkController(availablePort)
 draw_color = (255, 255, 255)
 erase_color = (0, 0, 0)
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0, cv2.CAP_DSHOW)
 canvas = np.zeros((480, 640, 3), dtype=np.uint8)
 prev_x, prev_y = 0, 0
 

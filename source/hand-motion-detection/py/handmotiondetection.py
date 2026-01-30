@@ -40,7 +40,7 @@ landmarker = HandLandmarker.create_from_options(options)
 MOVE_THRESHOLD = 8  # pixels
 duelink.Engine.ExecuteCommand(f"REye(0,0,0)")
 duelink.Engine.ExecuteCommand(f"LEye(0,0,0)")
-index_tip_x_old = None
+index_tip_x_prev = None
 count = 0
 while True:
     count = count+1
@@ -66,8 +66,8 @@ while True:
         index_tip_x = int(hand[8].x * frame.shape[1])
         index_tip_y = int(hand[8].y * frame.shape[0])
 
-        if index_tip_x_old is not None:
-            dx = index_tip_x - index_tip_x_old
+        if index_tip_x_prev is not None:
+            dx = index_tip_x - index_tip_x_prev
             index_tip_x_scale = 255
 
             if dx > MOVE_THRESHOLD or dx < -MOVE_THRESHOLD:
@@ -80,7 +80,7 @@ while True:
                     duelink.Engine.ExecuteCommand(f"REye({index_tip_x_scale},{index_tip_x_scale},{index_tip_x_scale})")
 
 
-        index_tip_x_old = index_tip_x
+        index_tip_x_prev = index_tip_x
 
         # Wrist (landmark 0)
         palm_x = int(hand[0].x * frame.shape[1])

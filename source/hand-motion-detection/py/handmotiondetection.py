@@ -1,3 +1,6 @@
+# In this project:
+# Ghizzy's eyes will blink when hand movement is detected.
+# Requires Python 3.14.
 import cv2
 import numpy as np
 import mediapipe as mp

@@ -1,0 +1,122 @@
+# servo motor 1: host
+# distance: address 1
+# servo motor: address 2
+# fan: address 3
+Alias(dis=_d, angle=_g, offset=_o)
+Asio(1)
+_d = 0
+_g = 45
+_o = 5
+_a = 0
+_f = 15
+ 
+ 
+dlmode(2,0)
+wait(40)
+ 
+servost(1,20) 
+cmd("sel(2)")
+cmd("servost(1, 0)")
+cmd("sel(3)")
+cmd("fan(0)")
+
+ 
+fn select(a)
+    # optimize bus, no need to set address if address is same
+    if a != _a
+        _a = a
+        CmdTmot(50)
+        cmd(fmt("sel(",_a,")"))
+        CmdTmot(1000)
+    end
+fend
+ 
+fn SetFan(a,o)
+    if o = 1
+        select(2)
+        cmd(fmt("servost(1,",a,")"))
+        select(3)
+        wait(100)
+        cmd("fan(95)")
+
+    else
+        select(3)
+        cmd("fan(0)")
+    end
+fend
+ 
+fn GetDist()
+ 
+    select(1)
+ 
+    d = cmd("Distance()")
+ 
+    if (d = -1)
+        cmd("dwrite(4,0)") # echo
+        wait(10)
+        cmd("dread(4,0)")
+        wait(10)
+ 
+        cmd("dwrite(3,0)")
+        d = cmd("Distance()")
+        wait(90)
+    end
+ 
+    return d
+fend
+ 
+fn scan(a)
+    servost(1,a)
+ 
+    return GetDist()
+fend
+ 
+fn Thread()
+    angle = 20
+    d = 1
+    offset = 5
+ 
+    while (1)
+ 
+        wait(100)
+        dis = GetDist()
+        servost(1,angle)
+        #println("angle: ", angle, ", dis:", dis)
+ 
+        angle = angle + (d*offset)
+ 
+        if (angle > 160)
+            d = -1
+        end
+ 
+        if (angle < 20)
+            d = 1
+        end
+ 
+        if (dis < _f && dis > 0)
+ 
+            dwrite(1,0)
+            SetFan(angle,1)
+ 
+            t = tickms()
+            
+            while (dis < _f) 
+                #println("angle: ", angle, ", dis:", dis)
+                dis = GetDist()
+                wait(60)
+            wend
+            
+            SetFan(0,0)
+            wait(100)
+        end
+    wend
+fend
+ 
+Thread()
+ 
+ 
+ 
+ 
+ 
+ 
+ 

@@ -1,0 +1,27 @@
+# In this projects:
+# Read X,Y and button state each 500ms
+fn main()
+    DLMode(5,0)
+    dim b0[4] # Store X,Y: 2 bytes for X, 2 bytes for Y
+    dim b1[1] # Button state: 1 byte
+    while (1)
+        # Read X,Y
+        dli2cwr(0x20,[0x03], b0) # test write-read use repeat start
+        x = (b0[0] << 8) | b0[1]
+        y = (b0[2] << 8) | b0[3]
+        
+        x = floor(scale(x,0,65535,0,100))
+        y = floor(scale(y,0,65535,0,100))
+        
+        # Read button state
+        dli2cwr(0x20,[0x07], []) 
+        dli2cwr(0x20,[], b1)
+        
+        println("X: ", x, ", Y:", y, ", button state:", b1[0])
+        
+        wait(1000)
+    wend
+fend
+ 
+main()
+

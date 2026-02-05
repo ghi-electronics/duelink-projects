@@ -1,0 +1,56 @@
+#PixoBit-LCD Clock
+
+# Arrays to store the X and Y coordinates of each hand of the clock
+
+dim a0[2]
+dim a1[2]
+dim a2[2]
+
+# Numeric variables storing the current value for each of the hands
+_h=5
+_m=0
+_s=0
+
+_p=3.1415926
+
+loop()
+
+fn loop()
+  while 1
+      clear(0)
+      face()
+      time()
+      show()
+      Wait(1000)
+  wend
+fend
+  
+# Draw the clock face
+fn face()
+  # Draw the small dot on the clock face
+  for i=0 to 60
+    a1[0]=25*cos(i*_p/30):a1[1]=25*sin(i*_p/30)
+    Pixel(1,64+a1[0],32+a1[1])
+  next
+
+  # Draw the large dots for every hour
+  for i=0 to 12
+    a1[0]=25*cos(i*_p/6):a1[1]=25*sin(i*_p/6)
+    Circle(1,64+a1[0],32+a1[1],2)
+  next
+fend  
+
+# Calculate and draw the new hand positions
+fn time()
+  a0[0]=16*cos(_h*_p/6):a0[1]=16*sin(_h*_p/6)
+  a1[0]=20*cos(_m*_p/30):a1[1]=20*sin(_m*_p/30)
+  a2[0]=25*cos(_s*_p/30):a2[1]=25*sin(_s*_p/30)
+  if _s=60:_s=0:_m=_m+1:end
+  if _m=60:_m=0:_h=_h+1:end
+  if _h=12:_h=0:end
+  _s=_s+1
+  
+  Line(1,64,32,64+a0[0],32+a0[1])
+  Line(1,64,32,64+a1[0],32+a1[1])
+  Line(1,64,32,64+a2[0],32+a2[1])
+fend

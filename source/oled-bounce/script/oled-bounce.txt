@@ -1,0 +1,22 @@
+# PixoBit - LCD Bouncing ball
+_x=64 # Ball X location
+_y=32 # Ball Y location
+_r=5  # Ball radius
+_a=3  # Ball X Speed
+_b=2  # Ball Y Speed
+fn loop()
+    while (1)
+        Clear(0)        # Clear the screen
+        Circle(1,_x,_y,_r) # Draw the ball
+        Show()          # Update the screen
+        
+        _x=_x+_a:_y=_y+_b        # Move the ball
+        
+        # Check if the ball hit one of the edges
+        #  if it did then reverse the direction and make _a sound
+        if _x<_r || _x>=(128-_r):_a=-_a:Buzzer(100,100):end
+        if _y<_r || _y>=(64-_r):_b=-_b:Buzzer(100,100):end
+    wend
+fend
+
+loop()

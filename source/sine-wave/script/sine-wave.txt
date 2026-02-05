@@ -2,18 +2,22 @@
 _h=16:_w=16
 _z=3.1415926/6
 _i=0
+dim a1[]={1,# Pin used
+    16, # Individual panel width
+    16, # Individual panel height
+    0} # Horizontal scanning
 
 GfxCfg(3, a1, 16, 16, 1)# type 3, 16x16 leds, buffered x1
 loop()
 
 fn SetPixel(p,r,g,b)
-    y = p / _w
+    x = p / _w
     t = p % _w
     
-    if (y & 1) = 0
-        x = t
+    if (x & 1) = 0
+        y = t
     else
-        x = (_w-1) - t
+        y = (_w-1) - t
     end
     c = r << 16 | g << 8 | b
     Pixel(c, x, y)

@@ -1,0 +1,114 @@
+dim a1[]={1,# Pin used
+    16, # Individual panel width
+    16, # Individual panel height
+    0} # Horizontal scanning
+ 
+_w=16      # Width of the matrix 
+_u=4       # Player X position
+_v=8       # Player Y position
+_t=0       # Player tail Y offset
+_b=15      # Wall X position
+_h=4       # Wall height
+_g=6       # Wall gap
+
+
+
+GfxCfg(3, a1, 16, 16, 1)# type 3, 16x16 leds, buffered x1
+BtnEn(20,1)
+loop()
+
+fn NeoSet(p,r,g,b)
+    x = p / _w
+    t = p % _w
+    
+    if (x & 1) = 0
+        y = t
+    else
+        y = (_w-1) - t
+    end
+    c = r << 16 | g << 8 | b
+    Pixel(c, x, y)
+fend
+
+fn loop()
+    while 1
+        clear(0)
+        plyr()
+        wall()
+        coll()
+        show()
+        wait(50)
+    wend
+fend
+
+fn plyr()
+    if BtnDown(20)
+        if _v>0:_v=_v-1:end
+        _t=1
+    else
+        if _v<15:_v=_v+0.5:end
+        _t=-1
+    end
+  _x=_u
+  _y=trunc(_v)
+  pxl()
+  NeoSet(_p, 64,0,64)
+  _x=_x-1
+  _y=_y+_t
+  pxl()
+  NeoSet(_p, 64,0,64)
+fend  
+
+fn wall()
+  _b=_b-0.25
+  if _b<=0
+    _b=15
+    _g=4+rnd(2)
+    _h=2+rnd(6)
+  end
+  for i=0 to 1
+    _x=trunc(_b)+i
+    for _y=0 to _h
+      pxl()
+      NeoSet(_p, 0,64,0)
+    next
+    for _y=_h+_g to 15
+      pxl()
+      NeoSet(_p, 0,64,0)
+    next
+  next
+fend
+
+fn coll()
+  i=trunc(_b)
+  if i != _u && i != _u-1 :return:end
+  if _v<=_h:die():end
+  if _v>=_h+_g:die():end
+fend 
+
+fn die()
+  for i=0 to 20
+    _x=(_u-2)+rnd(4)
+    _y=(_v-2)+rnd(4)
+    pxl()
+    NeoSet(_p, rnd(64),0,0)
+    #NeoShow(0,256)
+    show()
+  next
+  _b=15
+fend  
+
+fn pxl()
+  _p = _x*_w+(_x&1)*(_w-1)+(1-2*(_x&1))*_y
+fend
+
+
+
+
+ 
+ 
+ 
+ 
+ 
+ 
+ 

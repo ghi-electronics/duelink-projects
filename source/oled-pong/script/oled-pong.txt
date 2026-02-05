@@ -1,0 +1,156 @@
+# This run on PixoBit
+# remap the pin if difference device
+fn Start()
+    _a = 30 #Left Player Position
+    _b = 30 #Right Player Position
+    _g = 10 #Ball x
+    _h = 2.3 #Ball x direction
+    _i = 10 #Ball y
+    _j = 2.6 #Ball y direction
+    _s = 0 #Player1 Score
+    _t = 0 #Player2 Score
+    _w = 0 #Check Win
+fend
+ 
+fn Loop()
+    while 1
+        Clear(0)   
+        _g = _g + _h #Move Ball X
+        _i = _i + _j #Move Ball Y
+ 
+        if _i < 5 || _i> 55: #Bounce off top or bottom walls
+            _j = _j* -1
+        End
+ 
+        Fill(1, _g, _i, 4, 4) #Draw Ball
+ 
+        if _g > 118:
+            if _i >= (_b - 1) && _i <= (_b + 12)
+                #Add code here when player hits ball
+                _h = _h* -1
+                Buzzer(256,100)
+            else
+                #Add code here when player misses
+                _s = _s + 1
+                _g = 15
+                #Von()#Vibrate BrainGamer
+                DWrite(17,0) # P8 on BrainGamer
+                Wait(100)
+                #Voff()#Turn off Vibrate
+                DWrite(17,1) # P8 on BrainGamer
+            End
+        End
+ 
+        if _g < 12:
+            if _i >= (_a - 1) && _i <= (_a + 12)
+                #Add code here when player hits ball
+                _h = _h* -1
+                Buzzer(256,100) 
+            else
+                #Add code here when player misses
+                _t=_t+1
+                _g=115
+                #Von()#Vibrate BrainGamer 
+                DWrite(17,0) # P8 on BrainGamer
+                Wait(100)
+                #Voff()#Turn off Vibrate 
+                DWrite(17,1) # P8 on BrainGamer
+            End
+        End
+ 
+        #Rocker() #Check Rocker Move
+        x = ARead(8) # P4 on BrainGamer
+        y = ARead(6) # P3 on BrainGamer
+ 
+        if y < 40:_a = _a - 4:End #Move Left Paddle Up
+        if y > 60:_a = _a + 4:End #Move Left Paddle Down
+        if _a < 5:_a = 5:End #Left Paddle Hits Top
+        if _a > 50:_a = 50:End #Left Paddle Hits Bottom
+ 
+        Fill(1, 10, _a, 2, 10) #Draw Left Paddle
+ 
+        #Keys() #Check Key Press
+        u = DRead(13,1) # P14 on BrainGamer
+        d = DRead(14,1) # P15 on BrainGamer
+        l = DRead(12,1) # P13 on BrainGamer
+        r = DRead(10,1) # P16 on BrainGamer
+        if u = 0:_b = _b - 4:End #Move Right Paddle Up
+        if d = 0:_b = _b + 4:End #Move Right Paddle Down
+        if _b < 5:_b = 5:End #Right Paddle Hits Top
+        if _b > 50:_b = 50:End #Right Paddle Hits Bottom
+ 
+        Fill(1,120,_b,2,10) #Draw Right Paddle
+ 
+        For n = 0 to 64 step 10 #Draw Net
+            Line(1,64,n,64,n+5)
+        Next   
+ 
+        if _s = 5
+            Clear(0)
+            TextS("Player 1",1,5,0,2,2)
+            TextS("WINS!",1,25,20,2,2)
+            Show()
+            _w=1
+            Wait(3000)
+        End
+ 
+        if _t = 5
+            Clear(0)
+            TextS("Player 2",1,5,0,2,2)
+            TextS("WINS!",1,25,20,2,2)
+            Show()
+            _w=1
+            Wait(3000)
+        End
+ 
+        if _w = 1 #If winner play sound and restart      
+            Buzzer(256,1000) 
+            Buzzer(200,1000)
+            Buzzer(256,1000)  
+            Wait(1500)
+            Start()
+        else
+            Text(fmt(_s),1, 50, 5)
+            Text(fmt(_t),1, 74, 5)
+            Show()
+        End
+
+        Wait(10)
+    wend
+fend
+ 
+Start() 
+Loop()
+ 
+#####################################
+###       BrainGamer Driver       ###
+#####################################
+###   variables used by driver    ###
+###         x,y,u,d,l,r           ###
+#####################################        
+ 
+### Rocker ###
+# Reads the rocker position into x and y
+#fn Rocker
+#    x = ARead(4)
+#    y = ARead(3)
+#fend
+ 
+### Activate Vibrator ###
+#fn Von
+    #DWrite(8,0)
+#fend
+ 
+### Deactivate Vibrator ###
+#fn Voff
+    #DWrite(8,1)
+#fend
+ 
+### Read Keypad ####
+# Reads the 4 buttons into U,D,L,R
+#fn Keys
+#    u = DRead(14,1)
+#    d = DRead(15,1)
+#    l = DRead(13,1)
+#    r = DRead(16,1)
+#fend 

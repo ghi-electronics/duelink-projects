@@ -18,7 +18,6 @@ _o = 5
 _a = 0
 _f = 15
  
- 
 dlmode(2,0)
 wait(40)
  
@@ -121,10 +120,3 @@ fn Thread()
 fend
  
 Thread()
- 
- 
- 
- 
- 
- 
- 

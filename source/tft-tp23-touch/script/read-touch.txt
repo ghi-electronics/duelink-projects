@@ -1,0 +1,73 @@
+# This is region 1 User
+# Replace this with your code
+# StatLed(200,200,10)
+_a = 45
+_b = 15
+_c = 30
+_d = 30
+_e = 15
+Asio(1)
+ 
+Alias (startx=_a, starty=_b, width = _c, height=_d,offset=_e)
+dim b4[25] # touch X
+dim b5[25] # touch Y
+dim b6[25] # touched
+ 
+fn DrawBox(i,c)
+    x = (i % 5)
+    y = floor(i / 5)
+ 
+    Fill(c, startx + x * width + x*offset ,starty + y * height + y * offset,width,height)
+ 
+fend
+ 
+fn DrawBoxes()
+    i = 0
+    for i = 0 to 25
+        DrawBox(i,1)
+        x = (i % 5)
+        y = floor(i / 5) 
+        b4[i] = startx + x * (width + offset)
+        b5[i] = starty + y * (height + offset)
+    next
+fend
+ 
+fn GetTouchBox(i)
+    return b6[i]
+fend
+ 
+fn Scan()
+    x = TouchX()
+    y = TouchY()
+ 
+    while 1
+ 
+        if (TouchX() != x || TouchY()!=y ) 
+            x = TouchX()
+            y = TouchY()
+ 
+            for i = 0 to 25
+                if (x >= b4[i] - (offset*0.5)  && x <= (b4[i] + width) + (offset*0.5) && y >= b5[i] - (offset*0.5)  && y <= (b5[i] + height) + (offset*0.5))
+                    if (b6[i] = 0) 
+                        b6[i] = 1
+                        DrawBox(i, 0xFF0000)
+                    else
+                        b6[i] = 0
+                        DrawBox(i, 0xFFFFFF)
+                    end
+ 
+                    break
+                end
+            next
+ 
+        end
+        wait(10)
+ 
+    wend
+fend
+ 
+clear(0)
+DrawBoxes()
+Scan()
+ 
+ 

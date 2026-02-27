@@ -7,9 +7,11 @@
 
 import time
 
-# Leave these two variables as-is (your implementation handles them)
-availablePort = availablePort
-duelink = duelink
+import time
+from DUELink.DUELinkController import DUELinkController
+
+availablePort = DUELinkController.GetConnectionPort()
+duelink = DUELinkController(availablePort)
 
 b1 = [
     0x00,0xC1,0x81,0x40,0x01,0xC0,0x80,0x41,0x01,0xC0,0x80,0x41,0x00,0xC1,0x81,0x40,

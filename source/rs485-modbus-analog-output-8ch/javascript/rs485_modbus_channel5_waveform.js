@@ -5,14 +5,21 @@
 // ramping from 0V up to 3.3V and then back down to 0V repeatedly,
 // by writing voltage values to the corresponding Modbus register.
 
+import pkg_serialusb from 'dlserialusb';
+const {SerialUSB} = pkg_serialusb
+
+import pkg_duelink from 'duelink';
+const {DUELinkController} = pkg_duelink
+
+let duelink = new DUELinkController(new SerialUSB());
+await duelink.Connect();
+
+// Sleep helper (ms)
 function sleep(ms) {
     return new Promise(resolve => setTimeout(resolve, ms));
 }
 
-// Leave these two variables as-is (your implementation handles them)
-var availablePort = availablePort;
-var duelink = duelink;
-
+// Methods
 var b1 = [
     0x00,0xC1,0x81,0x40,0x01,0xC0,0x80,0x41,0x01,0xC0,0x80,0x41,0x00,0xC1,0x81,0x40,
     0x01,0xC0,0x80,0x41,0x00,0xC1,0x81,0x40,0x00,0xC1,0x81,0x40,0x01,0xC0,0x80,0x41,

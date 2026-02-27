@@ -4,15 +4,18 @@
 # It generates a continuous analog voltage waveform on Channel 5,
 # ramping from 0V up to 3.3V and then back down to 0V repeatedly,
 # by writing voltage values to the corresponding Modbus register.
+# This sample runs on QT-PY 2040 adafruit, and may need i2c pullup module
 
 import time
+import duelink 
 
-# Leave these two variables as-is (your implementation handles them)
-availablePort = availablePort
-duelink = duelink
+from duelink import transport
 
-# Rename duelink to due (as requested)
-due = duelink
+sclPIN = machine.Pin(23)
+sdaPIN = machine.Pin(22)
+ 
+i2c = transport.I2CTransportController(sda=sdaPIN, scl=sclPIN)
+due = duelink.DUELinkController(i2c)
 
 
 def sleep(ms):
@@ -63,7 +66,7 @@ dePin = 6  # DE pin
 
 def Init():
     due.Uart.Configuration(9600, 128)
-    due.Digital.Write(rePin, False)
+    due.Digital.Write(rePin, 0)
 
 
 def CalculateCrc(b4, s):
@@ -79,14 +82,14 @@ def CalculateCrc(b4, s):
 
 
 def SendCmd(b5):
-    due.Digital.Write(rePin, True)
-    due.Digital.Write(dePin, True)
+    due.Digital.Write(rePin, 1)
+    due.Digital.Write(dePin, 1)
 
     due.Uart.Discard()
     due.Uart.WriteBytes(b5)
 
-    due.Digital.Write(rePin, False)
-    due.Digital.Write(dePin, False)
+    due.Digital.Write(rePin, 0)
+    due.Digital.Write(dePin, 0)
 
 
 def SetChannel(channel, value):

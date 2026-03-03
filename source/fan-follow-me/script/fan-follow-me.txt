@@ -95,10 +95,3 @@ fn GetDist()
     d = cmd("Distance()")
     return d
 fend
- 
-fn scan(a)
-    servost(1,a)
-    return GetDist()
-fend
- 
-Loop()

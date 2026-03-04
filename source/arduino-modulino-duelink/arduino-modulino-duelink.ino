@@ -1,4 +1,3 @@
-#include "Arduino_LED_Matrix.h"
 #include <stdint.h>
 #include <Modulino.h>
 #include <Wire.h>

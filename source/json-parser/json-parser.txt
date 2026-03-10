@@ -3,10 +3,10 @@ fn strlen(b0)
     l =  idxof(b0,0)
  
     if l >=0
-        return l
-    else
-        return len(b0)
+        return l    
     end
+    
+    return len(b0)
 fend 
 
 fn JsonParser(b1,d,b2,e,b3)
@@ -14,7 +14,7 @@ fn JsonParser(b1,d,b2,e,b3)
     # d  = depth
     # b2 = key
     # e  = element index
-    # b3 = value output
+    # b3 = value output, make sure the size is bigger than output value length
  
     l = strlen(b1)
     p = strlen(b2)
@@ -133,3 +133,184 @@ fn JsonParser(b1,d,b2,e,b3)
     b3[0] = 0
     return -1
 fend
+
+fn ParseCase1()    
+    #{
+    #  "temperature": 21.5,
+    #  "humidity": 48,
+    #  "pressure": 1012
+    #}
+    dim b1[] = "{\"temperature\":21.5,\"humidity\":48,\"pressure\":1012}" # with/without '\n' does not matter
+    dim b2[] = "temperature"
+    dim b3[20]
+    d = 0 # deep 0 - root
+    e = 0 # element 0 - return first detected element
+    JsonParser(b1,d,b2,e,b3)
+    
+    # show temperature
+    println("Temperature:", b3) # 21.5
+fend
+
+fn ParseCase2()
+    
+    #{
+    #  "device": {
+    #    "temperature": 22.3,
+    #    "humidity": 40
+    # },
+    #  "battery": 87
+    #}
+    
+    dim b1[] = "{\"device\":{\"temperature\":22.3,\"humidity\":40},\"battery\":87}" # with/without '\n' does not matter
+    dim b2[] = "temperature"
+    dim b3[20]
+    d = 1 # deep 1 - element child deep 1
+    e = 0 # element 0 - return first detected element
+    JsonParser(b1,d,b2,e,b3)
+    
+    # show temperature
+    println("Temperature:", b3) # 22.3
+fend
+
+fn ParseCase3()
+    
+    #{
+    #  "sensor_units": {
+    #    "temperature": "C",
+    #    "humidity": "%"
+    #  },
+    #  "sensor_data": {
+    #    "temperature": 19.8,
+    #    "humidity": 55
+    #  }
+    #}
+    
+    # with/without '\n' does not matter
+    dim b1[] = "{\"sensor_units\":{\"temperature\":\"20.0\",\"humidity\":\"%\"},\"sensor_data\":{\"temperature\":19.8,\"humidity\":55}}"
+    dim b2[] = "temperature"
+    dim b3[20]
+    
+    d = 1 # deep 1 - element child deep 1
+    e = 0 # element 0 - return first detected element
+    JsonParser(b1,d,b2,e,b3)
+    # show temperature
+    println("Temperature:", b3) # 20.0
+    
+    d = 1 # deep 1 - element child deep 1
+    e = 1 # element 1 - return second detected element
+    JsonParser(b1,d,b2,e,b3)
+    # show temperature
+    println("Temperature:", b3) # 19.8
+fend
+
+fn ParseCase4()
+    
+    #{
+    #  "readings": [
+    #    { "temperature": 20.1 },
+    #    { "temperature": 21.4 }
+    # ]
+    #}
+    
+    # with/without '\n' does not matter
+    dim b1[] = "{\"readings\":[{\"temperature\":20.1},{\"temperature\":21.4}]}"
+    dim b2[] = "temperature"
+    dim b3[20]
+    
+    d = 2 # deep 2 - element child deep 2
+    e = 0 # element 0 - return first detected element
+    JsonParser(b1,d,b2,e,b3)
+    # show temperature
+    println("Temperature:", b3) # 20.1
+    
+    d = 2 # deep 2 - element child deep 2
+    e = 1 # element 1 - return second detected element
+    JsonParser(b1,d,b2,e,b3)
+    # show temperature
+    println("Temperature:", b3) # 21.4
+    
+    # Explain deep is 2 (d = 2)
+    # depth=0  {
+    # depth=1      "readings":
+    # depth=1      [
+    # depth=2          {
+    # depth=2              "temperature":20.1
+    # depth=2          }
+    # depth=2          {
+    # depth=2              "temperature":21.4
+    # depth=2          }
+    # depth=1      ]
+    # depth=0  }
+fend
+
+fn ParseCase5()
+    
+    #{
+    #  "system": {
+    #    "name": "station1",
+    #    "version": 2
+    #  },
+    #  "weather": {
+    #    "temperature": 16.7,
+    #    "wind": {
+    #      "speed": 8,
+    #      "direction": 120
+    #    }
+    #  }
+    #}
+    
+    # with/without '\n' does not matter
+    dim b1[] = "{\"system\":{\"name\":\"station1\",\"version\":2},\"weather\":{\"temperature\":16.7,\"wind\":{\"speed\":8,\"direction\":120}}}"
+    dim b3[20]
+    
+    dim b2[] = "name"
+    JsonParser(b1,1,b2,0,b3)   # d = 1, e = 0, key = "name" => station1
+    println("name:", b3) # station1
+    
+    dim b2[] = "temperature"
+    JsonParser(b1,1,b2,0,b3)   # d = 1, e = 0, key = "temperature" =>  16.7
+    println("temperature:", b3) # 16.7
+    
+    dim b2[] = "speed"
+    JsonParser(b1,2,b2,0,b3)   # d = 2, e = 0 , key = "speed"=>  8
+    println("speed:", b3) # 8
+    
+fend
+
+fn ParseCase6()
+    
+    #[
+    #  { "temperature": 20.1 },
+    #  { "temperature": 21.4 }
+    #]
+        
+    # with/without '\n' does not matter
+    dim b1[] = "[{\"temperature\":20.1},{\"temperature\":21.4}]"
+    dim b2[] = "temperature"
+    dim b3[20]
+    
+    JsonParser(b1,1,b2,0,b3) # d = 1, e = 0 => 20.1
+    println("Temp0:",b3)
+    
+    JsonParser(b1,1,b2,1,b3) # d = 1, e = 1 => 20.1
+    println("Temp1:",b3)
+    
+fend
+
+println("Case 1:")
+ParseCase1()
+
+println("Case 2:")
+ParseCase2()
+
+println("Case 3:")
+ParseCase3()
+
+println("Case 4:")
+ParseCase4()
+
+println("Case 5:")
+ParseCase5()
+
+println("Case 6:")
+ParseCase6()

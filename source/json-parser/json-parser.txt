@@ -1,0 +1,135 @@
+fn strlen(b0)
+    # return length of the string
+    l =  idxof(b0,0)
+ 
+    if l >=0
+        return l
+    else
+        return len(b0)
+    end
+fend 
+
+fn JsonParser(b1,d,b2,e,b3)
+    # b1 = json text
+    # d  = depth
+    # b2 = key
+    # e  = element index
+    # b3 = value output
+ 
+    l = strlen(b1)
+    p = strlen(b2)
+ 
+    a = 0      # current depth
+    c = 0      # match counter
+ 
+    for i = 0 to l-1
+ 
+        x = b1[i]
+ 
+        if x = '{' || x = '['
+            a = a + 1
+        end
+ 
+        if x = '}' || x = ']'
+            a = a - 1
+        end
+ 
+        if a = d + 1 && x = '"'
+ 
+            j = 0
+            t = i + 1
+ 
+            while 1
+ 
+                if t = l
+                    break
+                end
+ 
+                if j = p
+                    break
+                end
+ 
+                if b1[t] != b2[j]
+                    break
+                end
+ 
+                t = t + 1
+                j = j + 1
+ 
+            wend
+ 
+            if j = p
+ 
+                if t = l
+                    break
+                end
+ 
+                if b1[t] = '"'
+ 
+                    if c = e
+ 
+                        while 1
+                            if t = l
+                                break
+                            end
+ 
+                            if b1[t] = ':'
+                                break
+                            end
+ 
+                            t = t + 1
+                        wend
+ 
+                        t = t + 1
+ 
+                        while 1
+                            if t = l
+                                break
+                            end
+ 
+                            if b1[t] != ' '
+                                break
+                            end
+ 
+                            t = t + 1
+                        wend
+ 
+                        n = 0
+ 
+                        while 1
+ 
+                            if t = l
+                                break
+                            end
+ 
+                            if b1[t] = 0
+                                break
+                            end
+ 
+                            if b1[t] = ',' || b1[t] = '}' || b1[t] = ']' || b1[t] = 13 || b1[t] = 10
+                                break
+                            end
+ 
+                            if b1[t] != '"'
+                                b3[n] = b1[t]
+                                n = n + 1
+                            end
+ 
+                            t = t + 1
+ 
+                        wend
+ 
+                        b3[n] = 0
+                        return n
+                    end
+ 
+                    c = c + 1
+                end
+            end
+        end
+ 
+    next
+ 
+    b3[0] = 0
+    return -1
+fend

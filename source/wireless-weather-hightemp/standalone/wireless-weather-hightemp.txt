@@ -232,11 +232,8 @@ fn HighTemp()
         v = Parse(b3, 1, 4)
 
         # Discard all if any
-        SerDisc() 
+        SerDisc()        
     end
-    
-    AtCmd("AT+CIPCLOSE=0")
-    ATWaitResp(1000)
-    
+      
     return v
 fend

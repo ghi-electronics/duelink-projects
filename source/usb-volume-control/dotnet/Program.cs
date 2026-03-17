@@ -10,7 +10,7 @@
 // is set to zero or a low value.
 
 using NAudio.CoreAudioApi;
-using GHIElectronics.DUELink;
+using GHIElectronics.DUELink; 
 using System;
 
 var availablePort = DUELinkController.GetConnectionPort();

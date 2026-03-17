@@ -1,8 +1,8 @@
-﻿# In this project:
-# Read equalizer data from the PC and send it to the DUELink N18
-# The N18 displays the equalizer at 10 FPS
-# Alternatively, it can run on the DUELink SmartLED module that supports a NeoPixel LED matrix
-# The DUELink N18 requires a script to update the equalizer: https://github.com/ghi-electronics/duelink-projects/tree/main/source/usb-equalizer-spectrum/script
+﻿// In this project:
+// Read equalizer data from the PC and send it to the DUELink N18
+// The N18 displays the equalizer at 10 FPS
+// Alternatively, it can run on the DUELink SmartLED module that supports a NeoPixel LED matrix
+// The DUELink N18 requires a script to update the equalizer: https://github.com/ghi-electronics/duelink-projects/tree/main/source/usb-equalizer-spectrum/script
 
 using System;
 using System.Linq;

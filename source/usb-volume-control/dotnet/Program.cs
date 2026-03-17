@@ -8,7 +8,7 @@
 //
 // Before running this code, make sure the dial knob
 // is set to zero or a low value.
-
+ 
 using NAudio.CoreAudioApi;
 using GHIElectronics.DUELink; 
 using System;

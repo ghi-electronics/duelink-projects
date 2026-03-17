@@ -1,4 +1,9 @@
-﻿using System;
+﻿# In this project:
+# Read the equalizer data from the PC and send it to the DUELink N18
+# The N18 displays the equalizer at 10 FPS
+# Alternatively, this can also run on DUELink SmartLED module that supports NeoPixel LED matrix
+
+using System;
 using System.Linq;
 using NAudio.Wave;
 using NAudio.Dsp;

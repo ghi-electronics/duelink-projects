@@ -3,7 +3,7 @@
 // When there is no build: Ghizzy's eye color is blue.
 // When the build succeeds: Ghizzy's eye color is green.
 // When the build fails: Ghizzy's eye color is red.
-// When building: Ghizzy's eyes blink, the mouth blinks, and a beep sound is played.
+// When building or commit: Ghizzy's eyes blink, the mouth blinks, and a beep sound is played.
 
 using GHIElectronics.DUELink;
 using System;

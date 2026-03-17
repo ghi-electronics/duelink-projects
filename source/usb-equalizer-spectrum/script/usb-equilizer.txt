@@ -1,0 +1,37 @@
+ 
+dim b1[8] = [12,20,36,48,60,48,36,0]
+dim a1[] = {0x0000FF, 0x00FFFF, 0x00FF00, 0xFFFF00, 0xFF0000  }
+ 
+fn Equalizer(b1) 
+
+    wait(1)
+
+    Clear(0x101830)
+
+    for i = 0 to 8
+        v = b1[7-i]
+ 
+        p = v / 12
+ 
+        x = i * 10 + 2
+ 
+        r = v % 12
+ 
+        if p < 5 && r > 0 
+            y = 62 - (p + 1) * 12
+            Fill(a1[p+1], x, y + (12 - r), 5, r)
+        end
+ 
+        for l = 0 to 5
+            if l <= p 
+                y = 62 - (l + 1) * 12
+                Fill(a1[l], x, y, 5, 12)
+            end
+        next
+    next
+    show()
+end
+ 
+ 
+ 
+ 

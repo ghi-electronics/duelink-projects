@@ -2,7 +2,7 @@
 // - Use the Dial to control the PC volume.
 // - Display the current volume level on LED R16.
 //
-// Note:
+// Note: 
 // The application reads the value from the Dial module
 // and directly applies it to the PC volume.
 //

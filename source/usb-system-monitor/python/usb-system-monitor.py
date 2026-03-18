@@ -1,7 +1,7 @@
 # In this project:
 # - Monitor PC system metrics (CPU, RAM, Disk) in real time
 # - Update values every second
-# - Send and display information as text on a 106x80 DUELink screen
+# - Send and display information as text on a DUELink screen 
 # - Demonstrates USB-connected PC monitoring with lightweight rendering
 # require: pip install psutil wmi
 
@@ -18,7 +18,10 @@ duelink = DUELinkController(availablePort) #Bluetooth COM port, change to user c
 # duelink = DUELinkController("/dev/ttyAMA0")
 
 def Init():
-    duelink.Engine.ExecuteCommand("Init(0,0)")
+    if (duelink.Engine.ExecuteCommand("info(0)") == 0x010006):
+        duelink.Engine.ExecuteCommand("Init(1,0)")
+    else:
+        duelink.Engine.ExecuteCommand("Init(0,0)")
     time.sleep(0.25)
 
 

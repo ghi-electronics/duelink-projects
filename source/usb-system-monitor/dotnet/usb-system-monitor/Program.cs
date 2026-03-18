@@ -13,7 +13,10 @@ var duelink = new DUELinkController(availablePort);
 
 void Init()
 {
-    duelink.Engine.ExecuteCommand("Init(0,0)");
+    if (duelink.Engine.ExecuteCommand("info(0)") == 0x010006)
+        duelink.Engine.ExecuteCommand("Init(1,0)");
+    else
+        duelink.Engine.ExecuteCommand("Init(0,0)");
     Thread.Sleep(250);
 }
 

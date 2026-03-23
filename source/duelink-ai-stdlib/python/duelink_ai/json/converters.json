@@ -1,0 +1,194 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "rnd",
+        "description": "Returns a random number from 0 up to max.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "max": {
+              "type": "number",
+              "description": "Maximum value"
+            }
+          },
+          "required": [ "max" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "cos",
+        "description": "Returns cosine of rad (angle in radians).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "rad": {
+              "type": "number",
+              "description": "Angle in radians"
+            }
+          },
+          "required": [ "rad" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "sin",
+        "description": "Returns sine of rad (angle in radians).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "rad": {
+              "type": "number",
+              "description": "Angle in radians"
+            }
+          },
+          "required": [ "rad" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "tan",
+        "description": "Returns tangent of rad (angle in radians).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "rad": {
+              "type": "number",
+              "description": "Angle in radians"
+            }
+          },
+          "required": [ "rad" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "sqrt",
+        "description": "Returns square root of number.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "number": {
+              "type": "number"
+            }
+          },
+          "required": [ "number" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "abs",
+        "description": "Returns absolute value of number.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "number": {
+              "type": "number"
+            }
+          },
+          "required": [ "number" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "ceil",
+        "description": "Returns smallest integer greater than or equal to number.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "number": {
+              "type": "number"
+            }
+          },
+          "required": [ "number" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "floor",
+        "description": "Returns largest integer less than or equal to number.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "number": {
+              "type": "number"
+            }
+          },
+          "required": [ "number" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "round",
+        "description": "Rounds number to nearest integer.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "number": {
+              "type": "number"
+            }
+          },
+          "required": [ "number" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "trunc",
+        "description": "Removes fractional part of number.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "number": {
+              "type": "number"
+            }
+          },
+          "required": [ "number" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "isnan",
+        "description": "Check if number is not a valid number (NaN). Returns 1 if NaN, 0 otherwise.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "number": {
+              "type": "number"
+            }
+          },
+          "required": [ "number" ]
+        }
+      }
+    }
+  ]
+}

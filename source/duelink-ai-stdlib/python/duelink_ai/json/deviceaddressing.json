@@ -1,0 +1,45 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "sel",
+        "description": "Select one or multiple device addresses. 0 = broadcast to all devices.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "add": {
+              "type": "array",
+              "description": "List of device addresses (e.g. [3,7] or [0] for broadcast)"
+            }
+          },
+          "required": [ "add" ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "getadd",
+        "description": "Get currently selected device addresses.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "getcnt",
+        "description": "Get number of devices in the chain.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      }
+    }
+  ]
+}

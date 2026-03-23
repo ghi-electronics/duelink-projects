@@ -1,0 +1,58 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "print",
+        "description": "Print one or multiple values to output.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "values": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string" },
+                  { "type": "number" },
+                  {
+                    "type": "array",
+                    "items": { "type": "number" }
+                  }
+                ]
+              },
+              "description": "Values to print. If single text or number, use one element array."
+            }
+          },
+          "required": [ "values" ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "println",
+        "description": "Print values followed by newline.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "values": {
+              "type": "array",
+              "items": {
+                "anyOf": [
+                  { "type": "string" },
+                  { "type": "number" },
+                  {
+                    "type": "array",
+                    "items": { "type": "number" }
+                  }
+                ]
+              },
+              "description": "Values to print. If single text or number, use one element array."
+            }
+          },
+          "required": [ "values" ]
+        }
+      }
+    }
+  ]
+}

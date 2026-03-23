@@ -1,0 +1,312 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "gfxcfg",
+        "description": "Configure graphics device. type: 0=None,1=I2C display,2=SPI display,3=NeoPixel,4=LED matrix scanner,5=LED matrix list,6=ePaper. cfg depends on device type. width and height define resolution. mode=0 direct, >0 buffered.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "integer",
+              "enum": [ 0, 1, 2, 3, 4, 5, 6 ]
+            },
+            "cfg": {
+              "type": "array",
+              "items": {
+                "type": [ "number", "string" ]
+              },
+              "description": "Configuration array depending on device type"
+            },
+            "width": {
+              "type": "integer"
+            },
+            "height": {
+              "type": "integer"
+            },
+            "mode": {
+              "type": "integer",
+              "description": "0=direct, >0 buffered"
+            }
+          },
+          "required": [ "type", "width", "height", "mode" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "clear",
+        "description": "Clear screen or buffer with color.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "color": { "type": "integer" }
+          },
+          "required": [ "color" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "pixel",
+        "description": "Draw a pixel at x,y.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "color": { "type": "integer" },
+            "x": { "type": "integer" },
+            "y": { "type": "integer" }
+          },
+          "required": [ "color", "x", "y" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "circle",
+        "description": "Draw a circle.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "color": { "type": "integer" },
+            "x": { "type": "integer" },
+            "y": { "type": "integer" },
+            "radius": { "type": "integer" }
+          },
+          "required": [ "color", "x", "y", "radius" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "line",
+        "description": "Draw a line from (x1,y1) to (x2,y2).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "color": { "type": "integer" },
+            "x1": { "type": "integer" },
+            "y1": { "type": "integer" },
+            "x2": { "type": "integer" },
+            "y2": { "type": "integer" }
+          },
+          "required": [ "color", "x1", "y1", "x2", "y2" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "rect",
+        "description": "Draw rectangle.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "color": { "type": "integer" },
+            "x": { "type": "integer" },
+            "y": { "type": "integer" },
+            "width": { "type": "integer" },
+            "height": { "type": "integer" }
+          },
+          "required": [ "color", "x", "y", "width", "height" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "fill",
+        "description": "Fill rectangle area.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "color": { "type": "integer" },
+            "x": { "type": "integer" },
+            "y": { "type": "integer" },
+            "width": { "type": "integer" },
+            "height": { "type": "integer" }
+          },
+          "required": [ "color", "x", "y", "width", "height" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "text",
+        "description": "Draw text (7x5 font).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "text": { "type": "string" },
+            "color": { "type": "integer" },
+            "x": { "type": "integer" },
+            "y": { "type": "integer" }
+          },
+          "required": [ "text", "color", "x", "y" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "texts",
+        "description": "Draw scaled text.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "text": { "type": "string" },
+            "color": { "type": "integer" },
+            "x": { "type": "integer" },
+            "y": { "type": "integer" },
+            "scaleWidth": { "type": "integer" },
+            "scaleHeight": { "type": "integer" }
+          },
+          "required": [ "text", "color", "x", "y", "scaleWidth", "scaleHeight" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "textt",
+        "description": "Draw tiny text (5x5).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "text": { "type": "string" },
+            "color": { "type": "integer" },
+            "x": { "type": "integer" },
+            "y": { "type": "integer" }
+          },
+          "required": [ "text", "color", "x", "y" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "img",
+        "description": "Draw image with transform.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "image": {
+              "type": "array",
+              "items": { "type": "number" }
+            },
+            "x": { "type": "integer" },
+            "y": { "type": "integer" },
+            "w": { "type": "integer" },
+            "h": { "type": "integer" },
+            "transform": {
+              "type": "integer",
+              "enum": [ 0, 1, 2, 3, 4, 5 ]
+            }
+          },
+          "required": [ "image", "x", "y", "w", "h", "transform" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "imgs",
+        "description": "Draw scaled image.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "image": {
+              "type": "array",
+              "items": { "type": "number" }
+            },
+            "x": { "type": "integer" },
+            "y": { "type": "integer" },
+            "w": { "type": "integer" },
+            "h": { "type": "integer" },
+            "transform": { "type": "integer" },
+            "scaleWidth": { "type": "integer" },
+            "scaleHeight": { "type": "integer" }
+          },
+          "required": [ "image", "x", "y", "w", "h", "transform", "scaleWidth", "scaleHeight" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "imgb",
+        "description": "Draw binary image data.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "image": {
+              "type": "array",
+              "items": { "type": "number" }
+            },
+            "color": { "type": "integer" },
+            "x": { "type": "integer" },
+            "y": { "type": "integer" },
+            "w": { "type": "integer" },
+            "h": { "type": "integer" }
+          },
+          "required": [ "image", "color", "x", "y", "w", "h" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "show565",
+        "description": "Display 5:6:5 image (SPI direct mode only).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "image": {
+              "type": "array",
+              "items": { "type": "number" }
+            },
+            "x": { "type": "integer" },
+            "y": { "type": "integer" },
+            "w": { "type": "integer" },
+            "h": { "type": "integer" },
+            "hscale": { "type": "integer" },
+            "vscale": { "type": "integer" }
+          },
+          "required": [ "image", "x", "y", "w", "h", "hscale", "vscale" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "show",
+        "description": "Render buffered graphics to display.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      }
+    }
+  ]
+}

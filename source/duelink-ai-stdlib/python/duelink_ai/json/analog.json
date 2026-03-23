@@ -1,0 +1,62 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "aread",
+        "description": "Read analog value (0-4095).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pin": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "pin"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "vread",
+        "description": "Read voltage value from pin.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pin": {
+              "type": "integer"
+            }
+          },
+          "required": [
+            "pin"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "awrite",
+        "description": "Write PWM power. power is 0.0 to 1.0 (e.g. 0.5 = 50%).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pin": {
+              "type": "integer"
+            },
+            "power": {
+              "type": "number"
+            }
+          },
+          "required": [
+            "pin",
+            "power"
+          ]
+        }
+      }
+    }
+  ]
+}

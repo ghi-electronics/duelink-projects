@@ -1,0 +1,68 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "btnen",
+        "description": "Enable button scanning on pin. l defines pressed state (0=low pressed, 1=high pressed).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "p": {
+              "type": "integer",
+              "description": "Pin number"
+            },
+            "l": {
+              "type": "integer",
+              "enum": [ 0, 1 ],
+              "description": "Pressed logic level (0=low, 1=high)"
+            }
+          },
+          "required": [ "p", "l" ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "btnup",
+        "description": "Returns 1 if button transitioned to unpressed state.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "p": { "type": "integer" }
+          },
+          "required": [ "p" ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "btndown",
+        "description": "Returns 1 if button transitioned to pressed state.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "p": { "type": "integer" }
+          },
+          "required": [ "p" ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "btnread",
+        "description": "Returns 1 if button is currently pressed.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "p": { "type": "integer" }
+          },
+          "required": [ "p" ]
+        }
+      }
+    }
+  ]
+}

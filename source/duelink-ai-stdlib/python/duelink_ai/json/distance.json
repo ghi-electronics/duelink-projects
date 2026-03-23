@@ -1,0 +1,25 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "dist",
+        "description": "Read distance in centimeters from ultrasonic sensor.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "trig": {
+              "type": "integer",
+              "description": "Trigger pin"
+            },
+            "echo": {
+              "type": "integer",
+              "description": "Echo pin"
+            }
+          },
+          "required": [ "trig", "echo" ]
+        }
+      }
+    }
+  ]
+}

@@ -1,0 +1,46 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "i2ccfg",
+        "description": "Configure I2C clock speed. baudrate is in kHz (100 = 100kHz, 400 = 400kHz, 1000 = 1MHz).",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "baudrate": {
+              "type": "integer",
+              "description": "Clock speed in kHz"
+            }
+          },
+          "required": [ "baudrate" ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "i2cwr",
+        "description": "Write and optionally read data from an I2C device. Returns 1 if successful.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "address": {
+              "type": "integer",
+              "description": "7-bit I2C slave address"
+            },
+            "arrayWrite": {
+              "type": "array",
+              "description": "Array of bytes to send (can be empty)"
+            },
+            "arrayRead": {
+              "type": "array",
+              "description": "Array buffer to read into (defines read length)"
+            }
+          },
+          "required": [ "address" ]
+        }
+      }
+    }
+  ]
+}

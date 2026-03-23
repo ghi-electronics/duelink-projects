@@ -1,4 +1,9 @@
-﻿using GHIElectronics.DUELink;
+﻿//In this sample:
+
+//Read events from the Minetest game
+//Transfer events to the DUELink smart LED
+
+using GHIElectronics.DUELink;
 using System;
 using System.Drawing;
 using System.Text;

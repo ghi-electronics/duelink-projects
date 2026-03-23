@@ -1,0 +1,26 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "humid",
+        "description": "Read humidity from sensor type.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pin": {
+              "type": "integer",
+              "description": "Sensor pin"
+            },
+            "type": {
+              "type": "integer",
+              "enum": [ 0, 1, 2, 3, 4 ],
+              "description": "0=reserved, 1=DHT11, 2=DHT12, 3=DHT21, 4=DHT22"
+            }
+          },
+          "required": [ "pin", "type" ]
+        }
+      }
+    }
+  ]
+}

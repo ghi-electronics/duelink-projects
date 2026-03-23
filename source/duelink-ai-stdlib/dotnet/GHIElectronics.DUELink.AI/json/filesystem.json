@@ -1,0 +1,269 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "fsmnt",
+        "description": "Mount file system on SPI media. type: 1=SD card, 2=USB. cs=chip select pin. baud in kHz. max_handle is max open files. Returns 0 if success.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "integer",
+              "enum": [ 0, 1, 2 ]
+            },
+            "cs": { "type": "integer" },
+            "baud": { "type": "integer" },
+            "max_handle": { "type": "integer" }
+          },
+          "required": [ "type", "cs", "baud", "max_handle" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "fsunmnt",
+        "description": "Unmount file system.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "fsfmt",
+        "description": "Format storage media.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "type": {
+              "type": "integer",
+              "enum": [ 0, 1, 2 ]
+            },
+            "cs": { "type": "integer" },
+            "baud": { "type": "integer" }
+          },
+          "required": [ "type", "cs", "baud" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "fsopen",
+        "description": "Open file and return handle.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": { "type": "string" },
+            "mode": { "type": "integer" }
+          },
+          "required": [ "path", "mode" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "fsclose",
+        "description": "Close file handle.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "handle": { "type": "integer" }
+          },
+          "required": [ "handle" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "fswrite",
+        "description": "Write byte array to file.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "handle": { "type": "integer" },
+            "data": {
+              "type": "array",
+              "items": { "type": "number" }
+            }
+          },
+          "required": [ "handle", "data" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "fsread",
+        "description": "Read file into byte array.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "handle": { "type": "integer" },
+            "data": {
+              "type": "array",
+              "items": { "type": "number" }
+            }
+          },
+          "required": [ "handle", "data" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "fssync",
+        "description": "Sync file.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "handle": { "type": "integer" }
+          },
+          "required": [ "handle" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "fsseek",
+        "description": "Move file pointer.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "handle": { "type": "integer" },
+            "offset": { "type": "integer" }
+          },
+          "required": [ "handle", "offset" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "fstell",
+        "description": "Get file position.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "handle": { "type": "integer" }
+          },
+          "required": [ "handle" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "fsdel",
+        "description": "Delete file or directory.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": { "type": "string" }
+          },
+          "required": [ "path" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "fsfind",
+        "description": "Find file or directory.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": { "type": "string" }
+          },
+          "required": [ "path" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "fsfsz",
+        "description": "Get file size.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": { "type": "string" }
+          },
+          "required": [ "path" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "fsmkdir",
+        "description": "Create directory.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": { "type": "string" }
+          },
+          "required": [ "path" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "fsopdir",
+        "description": "Open directory.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "path": { "type": "string" }
+          },
+          "required": [ "path" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "fsfnext",
+        "description": "Get next file entry.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "name": {
+              "type": "array",
+              "items": { "type": "number" }
+            },
+            "type": {
+              "type": "array",
+              "items": { "type": "number" }
+            }
+          },
+          "required": [ "name", "type" ]
+        }
+      }
+    }
+  ]
+}

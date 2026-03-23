@@ -1,0 +1,90 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "istart",
+        "description": "Start interrupt on a pin. func is callback function name. trigger: 0=falling, 1=rising, 2=both edges. pull: 0=pull-down, 1=pull-up, 2=no pull.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "func": {
+              "type": "string",
+              "description": "Callback function name"
+            },
+            "pin": {
+              "type": "integer",
+              "description": "Pin number"
+            },
+            "trigger": {
+              "type": "integer",
+              "enum": [ 0, 1, 2 ],
+              "description": "0=falling, 1=rising, 2=both"
+            },
+            "pull": {
+              "type": "integer",
+              "enum": [ 0, 1, 2 ],
+              "description": "0=pull-down, 1=pull-up, 2=no pull"
+            }
+          },
+          "required": [ "func", "pin", "trigger", "pull" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "istatled",
+        "description": "Get interrupt status of function. Returns 0=no interrupt, 1=active interrupt.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "func": {
+              "type": "string",
+              "description": "Callback function name"
+            }
+          },
+          "required": [ "func" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "iabort",
+        "description": "Abort interrupt for given function.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "func": {
+              "type": "string",
+              "description": "Callback function name"
+            }
+          },
+          "required": [ "func" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "irqen",
+        "description": "Enable or disable global interrupts. 1=enable, 0=disable.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "e": {
+              "type": "integer",
+              "enum": [ 0, 1 ],
+              "description": "1=enable interrupts, 0=disable"
+            }
+          },
+          "required": [ "e" ]
+        }
+      }
+    }
+  ]
+}

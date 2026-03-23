@@ -1,0 +1,29 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "statled",
+        "description": "Blink the onboard status LED. The LED turns ON for 'high' milliseconds, then OFF for 'low' milliseconds, repeating for 'count' cycles. Time unit is milliseconds (1000 = 1 second). If count = 0, the blinking repeats forever.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "high": {
+              "type": "integer",
+              "description": "LED ON duration in milliseconds (e.g. 1000 = 1 second)"
+            },
+            "low": {
+              "type": "integer",
+              "description": "LED OFF duration in milliseconds (e.g. 1000 = 1 second)"
+            },
+            "count": {
+              "type": "integer",
+              "description": "Number of blink cycles. 0 means repeat forever."
+            }
+          },
+          "required": [ "high", "low", "count" ]
+        }
+      }
+    }
+  ]
+}

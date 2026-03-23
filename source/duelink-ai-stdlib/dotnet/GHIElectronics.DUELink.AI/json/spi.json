@@ -1,0 +1,63 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "spicfg",
+        "description": "Configure SPI. mode = 0–3, frequency in kHz (200–20000). Set bit7 of mode for LSB.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "integer",
+              "description": "SPI mode (0–3), bit7=1 for LSB"
+            },
+            "frequency": {
+              "type": "integer",
+              "description": "Clock frequency in kHz"
+            }
+          },
+          "required": [ "mode", "frequency" ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "spiwr",
+        "description": "Write a single byte over SPI and return received byte.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "byte": {
+              "type": "integer",
+              "description": "Byte to send"
+            }
+          },
+          "required": [ "byte" ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "spiwrs",
+        "description": "Write an array of bytes and return received array.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "data_w": {
+              "type": "array",
+              "description": "Array of bytes to send"
+            },
+            "data_r": {
+              "type": "array",
+              "description": "Array buffer to receive data"
+            }
+          },
+          "required": [ "data_w" ]
+        }
+      }
+    }
+  ]
+}

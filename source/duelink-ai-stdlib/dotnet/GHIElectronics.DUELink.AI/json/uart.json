@@ -1,0 +1,114 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "sercfg",
+        "description": "Start serial port. baud is speed (can be negative for hardware UART), rxsize is buffer size.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "baud": {
+              "type": "integer",
+              "description": "Baud rate (e.g. 9600, 115200, or negative for hardware UART)"
+            },
+            "rxsize": {
+              "type": "integer",
+              "description": "Receive buffer size"
+            }
+          },
+          "required": [ "baud", "rxsize" ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "serrd",
+        "description": "Read a single byte. Returns 0 if no data.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "serrds",
+        "description": "Read multiple bytes into array with timeout in milliseconds.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array",
+              "description": "Buffer to fill"
+            },
+            "timeout": {
+              "type": "integer",
+              "description": "Timeout in milliseconds"
+            }
+          },
+          "required": [ "data", "timeout" ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "serwr",
+        "description": "Write a single byte.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "byte": {
+              "type": "integer"
+            }
+          },
+          "required": [ "byte" ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "serwrs",
+        "description": "Write an array of bytes.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "data": {
+              "type": "array"
+            }
+          },
+          "required": [ "data" ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "serb2r",
+        "description": "Return number of bytes available in buffer.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "serdisc",
+        "description": "Discard receive buffer.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      }
+    }
+  ]
+}

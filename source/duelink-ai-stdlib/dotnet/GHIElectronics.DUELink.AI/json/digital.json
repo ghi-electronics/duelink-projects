@@ -1,0 +1,60 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "dread",
+        "description": "Read digital state of a pin. pull: 0=no pull, 1=pull-up, 2=pull-down.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pin": {
+              "type": "integer",
+              "description": "Pin number"
+            },
+            "pull": {
+              "type": "integer",
+              "enum": [
+                0,
+                1,
+                2
+              ],
+              "description": "0=no pull, 1=pull-up, 2=pull-down"
+            }
+          },
+          "required": [
+            "pin",
+            "pull"
+          ]
+        }
+      }
+    },
+    {
+      "type": "function",
+      "function": {
+        "name": "dwrite",
+        "description": "Write digital value to a pin. value: 0=LOW, 1=HIGH.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pin": {
+              "type": "integer"
+            },
+            "value": {
+              "type": "integer",
+              "enum": [
+                0,
+                1
+              ],
+              "description": "0=LOW,1=HIGH"
+            }
+          },
+          "required": [
+            "pin",
+            "value"
+          ]
+        }
+      }
+    }
+  ]
+}

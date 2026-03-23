@@ -1,0 +1,140 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "dlmode",
+        "description": "Set Downlink mode. mode defines communication type. cfg depends on selected mode.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "mode": {
+              "type": "integer",
+              "description": "Downlink mode"
+            },
+            "cfg": {
+              "type": "array",
+              "description": "Configuration depending on mode"
+            }
+          },
+          "required": [ "mode" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "dli2cwr",
+        "description": "Write and optionally read data over Downlink I2C. Only works in DLMode(5,0). Returns 1 if succeeded.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "address": {
+              "type": "integer",
+              "description": "7-bit I2C slave address"
+            },
+            "arrayWrite": {
+              "type": "array",
+              "description": "Array of bytes to send"
+            },
+            "arrayRead": {
+              "type": "array",
+              "description": "Array buffer to receive data"
+            }
+          },
+          "required": [ "address" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "cmd",
+        "description": "Send a script command over Downlink in Host mode (DLMode(2,0)). Returns a float value or variable.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "command": {
+              "type": "string",
+              "description": "Script command to execute remotely"
+            }
+          },
+          "required": [ "command" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "cmdtmot",
+        "description": "Set timeout for Cmd() in milliseconds. Default is 1000ms.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "t": {
+              "type": "integer",
+              "description": "Timeout in milliseconds"
+            }
+          },
+          "required": [ "t" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "dlserwr",
+        "description": "Write byte array to Downlink serial.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "array": {
+              "type": "array",
+              "description": "Data to send"
+            }
+          },
+          "required": [ "array" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "dlserrd",
+        "description": "Read bytes from Downlink serial into array with timeout in milliseconds. Returns number of bytes read.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "array": {
+              "type": "array",
+              "description": "Buffer to receive data"
+            },
+            "timeout": {
+              "type": "integer",
+              "description": "Timeout in milliseconds"
+            }
+          },
+          "required": [ "array", "timeout" ]
+        }
+      }
+    },
+
+    {
+      "type": "function",
+      "function": {
+        "name": "dlser2r",
+        "description": "Return number of bytes available to read from Downlink receive buffer.",
+        "parameters": {
+          "type": "object",
+          "properties": {},
+          "required": []
+        }
+      }
+    }
+  ]
+}

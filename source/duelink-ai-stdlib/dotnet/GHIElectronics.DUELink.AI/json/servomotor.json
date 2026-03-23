@@ -1,0 +1,25 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "servost",
+        "description": "Set servo position in degrees (0 to 180). Requires PWM pin.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pin": {
+              "type": "integer",
+              "description": "PWM pin"
+            },
+            "degree": {
+              "type": "integer",
+              "description": "Angle in degrees (0 to 180)"
+            }
+          },
+          "required": [ "pin", "degree" ]
+        }
+      }
+    }
+  ]
+}

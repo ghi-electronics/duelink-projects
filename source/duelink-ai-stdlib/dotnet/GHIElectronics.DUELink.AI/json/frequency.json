@@ -1,0 +1,36 @@
+{
+  "tools": [
+    {
+      "type": "function",
+      "function": {
+        "name": "freq",
+        "description": "Generate PWM signal. duration is in milliseconds (1000 = 1 second). duration=0 means run forever.",
+        "parameters": {
+          "type": "object",
+          "properties": {
+            "pin": {
+              "type": "integer"
+            },
+            "frequency": {
+              "type": "integer"
+            },
+            "duration": {
+              "type": "integer",
+              "description": "milliseconds, 0=forever"
+            },
+            "dutycycle": {
+              "type": "number",
+              "description": "0.0 to 1.0"
+            }
+          },
+          "required": [
+            "pin",
+            "frequency",
+            "duration",
+            "dutycycle"
+          ]
+        }
+      }
+    }
+  ]
+}

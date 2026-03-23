@@ -1,0 +1,14 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <PackageId>GHIElectronics.DUELink.AI</PackageId>
+    <Version>0.0.1</Version>
+  </PropertyGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\*.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="GHIElectronics.DUELink" Version="1.2.5" />
+  </ItemGroup>
+</Project>
